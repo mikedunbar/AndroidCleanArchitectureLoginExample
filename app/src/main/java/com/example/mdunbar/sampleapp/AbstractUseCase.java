@@ -20,7 +20,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * the core work in a background thread, freeing up the UI thread until we are ready to update
  * the UI with results.
  *
- *
  * Defines a template method - execute, which calls 2 abstract methods implemented in subclasses - {@link #performUseCase(Object)} and
  * {@link #handleResults(Object, Results)}. Allows performUseCase and handleResults to be execute in different threads or the same -
  * controlled by the constructor arguments.
