@@ -1,6 +1,10 @@
 package com.example.mdunbar.sampleapp;
 
+import com.example.mdunbar.sampleapp.model.LoginResultsListener;
+import com.example.mdunbar.sampleapp.model.LoginUseCase;
 import com.google.common.base.Strings;
+
+import javax.inject.Inject;
 
 /**
  * Basic {@link LoginPresenter} that also listens for login results and updates the {@link LoginView}
@@ -15,16 +19,28 @@ public class LoginPresenterImpl implements LoginPresenter, LoginResultsListener 
     /**
      * Create a new Login Presenter
      *
-     * @param loginView View to update based on login results.
      * @param loginUseCase Use case to delegate core logic work to.
      */
-    public LoginPresenterImpl(LoginView loginView, LoginUseCase loginUseCase) {
-        this.loginView = loginView;
+    @Inject
+    public LoginPresenterImpl(LoginUseCase loginUseCase) {
         this.loginUseCase = loginUseCase;
+    }
+
+    /**
+     *
+     * @param loginView View to update based on login results.
+     */
+    public void attachView(LoginView loginView) {
+        this.loginView = loginView;
+    }
+
+    public void detachView() {
+        this.loginView = null;
     }
 
     @Override
     public void doLogin(String email, String password) {
+        verifyViewAttached();
         if (Strings.isNullOrEmpty(email)) {
             loginView.showEmailRequiredError();
         } else if (Strings.isNullOrEmpty(password)) {
@@ -50,18 +66,29 @@ public class LoginPresenterImpl implements LoginPresenter, LoginResultsListener 
     /*** LoginResultsListener ***/
     @Override
     public void onLoginSuccess() {
+        verifyViewAttached();
         loginView.navigateToLandingPage();
     }
 
     @Override
     public void onNetworkError() {
+        verifyViewAttached();
         loginView.showProgress(false);
         loginView.showNetworkError();
     }
 
     @Override
     public void onValidationError() {
+        verifyViewAttached();
         loginView.showProgress(false);
         loginView.showValidationError();
     }
+
+    private void verifyViewAttached() {
+        if (loginView == null) {
+            throw new IllegalStateException();
+        }
+    }
+
+
 }

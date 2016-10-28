@@ -1,5 +1,7 @@
-package com.example.mdunbar.sampleapp;
+package com.example.mdunbar.sampleapp.model;
 
+import com.example.mdunbar.sampleapp.model.LoginResultsListener;
+import com.example.mdunbar.sampleapp.model.LoginUseCase;
 import com.google.common.util.concurrent.MoreExecutors;
 
 import org.junit.Before;

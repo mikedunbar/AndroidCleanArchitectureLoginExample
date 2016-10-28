@@ -1,4 +1,4 @@
-package com.example.mdunbar.sampleapp;
+package com.example.mdunbar.sampleapp.model;
 
 import com.google.common.base.Throwables;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -107,4 +107,5 @@ public abstract class AbstractUseCase<ParamT, ResultT> {
             }
         }
     }
+
 }

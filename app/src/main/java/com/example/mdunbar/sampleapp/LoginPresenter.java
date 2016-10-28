@@ -9,6 +9,16 @@ package com.example.mdunbar.sampleapp;
 public interface LoginPresenter {
 
     /**
+     * @param loginView view to attach to presenter.
+     */
+    void attachView(LoginView loginView);
+
+    /**
+     * Detach the current view from the presenter. If no view currently attached, does nothing.
+     */
+    void detachView();
+
+    /**
      * Attempt a login
      *
      * @param email Login email

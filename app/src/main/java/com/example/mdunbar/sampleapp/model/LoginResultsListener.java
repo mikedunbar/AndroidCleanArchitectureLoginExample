@@ -1,4 +1,4 @@
-package com.example.mdunbar.sampleapp;
+package com.example.mdunbar.sampleapp.model;
 
 /**
  * Results listener companion to {@link LoginUseCase}

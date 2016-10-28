@@ -12,8 +12,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -28,8 +26,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.mdunbar.sampleapp.dagger.DaggerLoginComponent;
+import com.example.mdunbar.sampleapp.dagger.LoginComponent;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -43,7 +46,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView, Loade
      */
     private static final int REQUEST_READ_CONTACTS = 0;
 
-    private LoginPresenter loginPresenter;
+    @Inject
+    LoginPresenter loginPresenter;
 
     // UI references.
     private AutoCompleteTextView emailView;
@@ -55,6 +59,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView, Loade
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ((LoginApplication)getApplication()).getLoginComponent().inject(this);
+
         setContentView(R.layout.activity_login);
 
         emailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -83,9 +90,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, Loade
         formView = findViewById(R.id.login_form);
         progressView = findViewById(R.id.login_progress);
 
-        LoginUseCase loginUseCase = new LoginUseCase(LoginUseCase.BACKGROUND_EXECUTOR_SERVICE,
-                new HandlerExecutor(new Handler(Looper.getMainLooper())));
-        loginPresenter = new LoginPresenterImpl(this, loginUseCase);
+        loginPresenter.attachView(this);
     }
 
     private void populateAutoComplete() {

@@ -1,4 +1,4 @@
-package com.example.mdunbar.sampleapp;
+package com.example.mdunbar.sampleapp.model;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;

@@ -1,5 +1,7 @@
 package com.example.mdunbar.sampleapp;
 
+import com.example.mdunbar.sampleapp.model.LoginUseCase;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +9,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LoginPresenterImplTest {
@@ -21,7 +22,8 @@ public class LoginPresenterImplTest {
 
     @Before
     public void setUp() {
-        loginPresenter = new LoginPresenterImpl(loginView, loginUseCase);
+        loginPresenter = new LoginPresenterImpl(loginUseCase);
+        loginPresenter.attachView(loginView);
     }
 
     @Test
