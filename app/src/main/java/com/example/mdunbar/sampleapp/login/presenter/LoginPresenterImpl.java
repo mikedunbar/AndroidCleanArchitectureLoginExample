@@ -1,7 +1,9 @@
-package com.example.mdunbar.sampleapp;
+package com.example.mdunbar.sampleapp.login.presenter;
 
+import com.example.mdunbar.sampleapp.login.view.LoginView;
 import com.example.mdunbar.sampleapp.model.LoginResultsListener;
 import com.example.mdunbar.sampleapp.model.LoginUseCase;
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
 
 import javax.inject.Inject;
@@ -15,6 +17,11 @@ import javax.inject.Inject;
 public class LoginPresenterImpl implements LoginPresenter, LoginResultsListener {
     private LoginView loginView;
     private LoginUseCase loginUseCase;
+
+    @VisibleForTesting String email;
+    @VisibleForTesting String password;
+    @VisibleForTesting boolean loginStarted;
+    @VisibleForTesting LoginUseCase.Result loginResult;
 
     /**
      * Create a new Login Presenter
@@ -32,6 +39,30 @@ public class LoginPresenterImpl implements LoginPresenter, LoginResultsListener 
      */
     public void attachView(LoginView loginView) {
         this.loginView = loginView;
+        loginView.setEmail(email);
+        loginView.setPassword(password);
+
+        if (!loginStarted) {
+            loginView.hideProgress();
+            return;
+        }
+
+        if (loginResult == null) {
+            loginView.showProgress();
+            return;
+        }
+
+        switch (loginResult) {
+            case SUCCESS:
+                onLoginSuccess();
+                break;
+            case NETWORK_ERROR:
+                onNetworkError();
+                break;
+            case VALIDATION_ERROR:
+                onValidationError();
+                break;
+        }
     }
 
     public void detachView() {
@@ -40,7 +71,11 @@ public class LoginPresenterImpl implements LoginPresenter, LoginResultsListener 
 
     @Override
     public void doLogin(String email, String password) {
-        verifyViewAttached();
+        this.email = email;
+        this.password = password;
+        loginStarted = false;
+        loginResult = null;
+
         if (Strings.isNullOrEmpty(email)) {
             loginView.showEmailRequiredError();
         } else if (Strings.isNullOrEmpty(password)) {
@@ -50,8 +85,9 @@ public class LoginPresenterImpl implements LoginPresenter, LoginResultsListener 
         } else if (!isPasswordValid(password)) {
             loginView.showPasswordInvalidError();
         } else {
+            loginStarted = true;
             loginUseCase.doLogin(email, password, this);
-            loginView.showProgress(true);
+            loginView.showProgress();
         }
     }
 
@@ -66,29 +102,27 @@ public class LoginPresenterImpl implements LoginPresenter, LoginResultsListener 
     /*** LoginResultsListener ***/
     @Override
     public void onLoginSuccess() {
-        verifyViewAttached();
-        loginView.navigateToLandingPage();
+        loginResult = LoginUseCase.Result.SUCCESS;
+        if (loginView != null) {
+            loginView.navigateToLandingPage();
+        }
     }
 
     @Override
     public void onNetworkError() {
-        verifyViewAttached();
-        loginView.showProgress(false);
-        loginView.showNetworkError();
+        loginResult = LoginUseCase.Result.NETWORK_ERROR;
+        if (loginView != null) {
+            loginView.hideProgress();
+            loginView.showNetworkError();
+        }
     }
 
     @Override
     public void onValidationError() {
-        verifyViewAttached();
-        loginView.showProgress(false);
-        loginView.showValidationError();
-    }
-
-    private void verifyViewAttached() {
-        if (loginView == null) {
-            throw new IllegalStateException();
+        loginResult = LoginUseCase.Result.VALIDATION_ERROR;
+        if (loginView != null) {
+            loginView.hideProgress();
+            loginView.showValidationError();
         }
     }
-
-
 }

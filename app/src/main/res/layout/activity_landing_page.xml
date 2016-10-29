@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.mdunbar.sampleapp.LandingPageActivity">
+    tools:context="com.example.mdunbar.sampleapp.landing.LandingPageActivity">
 
    <TextView
             android:id="@+id/success"
@@ -16,5 +16,14 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="SUCCESSFUL LOGIN!"/>
+
+   <Button
+       android:id="@+id/logout_button"
+       style="?android:textAppearanceSmall"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="16dp"
+       android:text="@string/logout"
+       android:textStyle="bold" />
 
 </RelativeLayout>

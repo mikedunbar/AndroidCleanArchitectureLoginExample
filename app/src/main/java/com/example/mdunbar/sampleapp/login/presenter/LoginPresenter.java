@@ -1,4 +1,6 @@
-package com.example.mdunbar.sampleapp;
+package com.example.mdunbar.sampleapp.login.presenter;
+
+import com.example.mdunbar.sampleapp.login.view.LoginView;
 
 /**
  * Presenter for the Login screen.

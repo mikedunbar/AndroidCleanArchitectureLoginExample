@@ -10,7 +10,7 @@ import com.example.mdunbar.sampleapp.dagger.LoginComponent;
  *
  * @author Mike Dunbar
  */
-public class LoginApplication extends Application {
+public class SampleApplication extends Application {
     LoginComponent loginComponent;
 
     @Override

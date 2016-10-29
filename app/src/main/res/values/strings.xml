@@ -11,8 +11,5 @@
     <string name="error_incorrect_password">Email or password is incorrect</string>
     <string name="error_network">System unavailable. Please try again</string>
     <string name="error_field_required">This field is required</string>
-    <string name="log_back_out">Log Back Out</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+    <string name="logout">Log Out</string>
 </resources>

@@ -9,7 +9,7 @@ import java.util.concurrent.ExecutorService;
  *
  * @author Mike Dunbar
  */
-public class LoginUseCase extends AbstractUseCase<LoginUseCase.Input, LoginUseCase.LoginResult> {
+public class LoginUseCase extends AbstractUseCase<LoginUseCase.Input, LoginUseCase.Result> {
 
     /**
      * Create a new instance of the login use case.
@@ -33,7 +33,7 @@ public class LoginUseCase extends AbstractUseCase<LoginUseCase.Input, LoginUseCa
     }
 
     @Override
-    protected LoginResult performUseCase(Input input) throws Exception {
+    protected Result performUseCase(Input input) throws Exception {
         String[] DUMMY_CREDENTIALS = new String[]{
         "foo@example.com:hello", "bar@example.com:world"};
 
@@ -41,7 +41,7 @@ public class LoginUseCase extends AbstractUseCase<LoginUseCase.Input, LoginUseCa
             // Simulate network access.
             Thread.sleep(2000);
         } catch (InterruptedException e) {
-            return LoginResult.NETWORK_ERROR;
+            return Result.NETWORK_ERROR;
         }
 
         boolean match = false;
@@ -52,11 +52,11 @@ public class LoginUseCase extends AbstractUseCase<LoginUseCase.Input, LoginUseCa
                 break;
             }
         }
-        return match ? LoginResult.SUCCESS : LoginResult.VALIDATION_ERROR;
+        return match ? Result.SUCCESS : Result.VALIDATION_ERROR;
     }
 
     @Override
-    protected void handleResults(Input input, Results<LoginResult> results) {
+    protected void handleResults(Input input, Results<Result> results) {
         try {
             switch (results.get()) {
                 case SUCCESS:
@@ -86,7 +86,7 @@ public class LoginUseCase extends AbstractUseCase<LoginUseCase.Input, LoginUseCa
         }
     }
 
-    enum LoginResult {
+    public enum Result {
         SUCCESS,
         NETWORK_ERROR,
         VALIDATION_ERROR

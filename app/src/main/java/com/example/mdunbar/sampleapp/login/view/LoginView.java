@@ -1,4 +1,4 @@
-package com.example.mdunbar.sampleapp;
+package com.example.mdunbar.sampleapp.login.view;
 
 /**
  * View for the login screen. Informs the user of any errors, progress, and navigates to the
@@ -8,6 +8,10 @@ package com.example.mdunbar.sampleapp;
  */
 
 public interface LoginView {
+
+    void setEmail(String email);
+
+    void setPassword(String password);
 
     void showEmailRequiredError();
 
@@ -21,12 +25,9 @@ public interface LoginView {
 
     void showValidationError();
 
-    /**
-     * Show the progress dialogue and hides the form, or vice-versa
-     *
-     * @param showProgress if true, show progress dialogue and hide form. If false, do the opposite
-     */
-    void showProgress(boolean showProgress);
+    void showProgress();
+
+    void hideProgress();
 
     void navigateToLandingPage();
 }
