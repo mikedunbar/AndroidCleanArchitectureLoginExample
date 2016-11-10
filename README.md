@@ -11,6 +11,8 @@ I just had Android Studio generate a sample login activity application, and then
 - Gracefully handle activity lifecycle events, so we attach/detach to the presenter appropriately and don't lose TXN status
 - Organize classes into a sensible package structure
 - Remove 'auto-populate email code', since it detracts from what I want to highlight
+- Added a 'browse contacts' screen to showcase use of runtime permissions
+- Add an option to bypass login, to quickly access other pages
 
 ## Valid login credentials:
 - foo@example.com / hello
