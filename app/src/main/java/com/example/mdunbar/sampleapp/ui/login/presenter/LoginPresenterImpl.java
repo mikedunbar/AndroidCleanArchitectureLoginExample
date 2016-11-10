@@ -1,6 +1,6 @@
-package com.example.mdunbar.sampleapp.login.presenter;
+package com.example.mdunbar.sampleapp.ui.login.presenter;
 
-import com.example.mdunbar.sampleapp.login.view.LoginView;
+import com.example.mdunbar.sampleapp.ui.login.view.LoginView;
 import com.example.mdunbar.sampleapp.model.LoginResultsListener;
 import com.example.mdunbar.sampleapp.model.LoginUseCase;
 import com.google.common.annotations.VisibleForTesting;
@@ -89,6 +89,11 @@ public class LoginPresenterImpl implements LoginPresenter, LoginResultsListener 
             loginUseCase.doLogin(email, password, this);
             loginView.showProgress();
         }
+    }
+
+    @Override
+    public void bypassLogin() {
+        loginView.navigateToLandingPage();
     }
 
     private boolean isEmailValid(String email) {

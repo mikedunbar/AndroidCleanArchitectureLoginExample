@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_landing_page"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.mdunbar.sampleapp.landing.LandingPageActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/activity_landing_page"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:paddingBottom="@dimen/activity_vertical_margin"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingRight="@dimen/activity_horizontal_margin"
+              android:paddingTop="@dimen/activity_vertical_margin"
+              tools:context=".ui.landing.LandingPageActivity"
+              android:orientation="vertical">
 
    <TextView
             android:id="@+id/success"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="SUCCESSFUL LOGIN!"/>
+            android:text="@string/landing_page"/>
 
    <Button
        android:id="@+id/logout_button"
@@ -26,4 +27,13 @@
        android:text="@string/logout"
        android:textStyle="bold" />
 
-</RelativeLayout>
+   <Button
+       android:id="@+id/view_contacts_screen_button"
+       style="?android:textAppearanceSmall"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="16dp"
+       android:text="@string/view_contacts"
+       android:textStyle="bold" />
+
+</LinearLayout>

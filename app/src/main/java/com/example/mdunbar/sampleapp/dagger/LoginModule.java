@@ -4,8 +4,8 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.example.mdunbar.sampleapp.HandlerExecutor;
-import com.example.mdunbar.sampleapp.login.presenter.LoginPresenter;
-import com.example.mdunbar.sampleapp.login.presenter.LoginPresenterImpl;
+import com.example.mdunbar.sampleapp.ui.login.presenter.LoginPresenter;
+import com.example.mdunbar.sampleapp.ui.login.presenter.LoginPresenterImpl;
 import com.example.mdunbar.sampleapp.model.LoginUseCase;
 
 import dagger.Module;

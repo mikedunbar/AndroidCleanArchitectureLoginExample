@@ -1,6 +1,6 @@
-package com.example.mdunbar.sampleapp.login.presenter;
+package com.example.mdunbar.sampleapp.ui.login.presenter;
 
-import com.example.mdunbar.sampleapp.login.view.LoginView;
+import com.example.mdunbar.sampleapp.ui.login.view.LoginView;
 import com.example.mdunbar.sampleapp.model.LoginUseCase;
 
 import org.junit.Before;
@@ -10,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -110,6 +109,12 @@ public class LoginPresenterImplTest {
         loginPresenter.doLogin(VALID_EMAIL, VALID_PASSWORD);
         verify(loginUseCase).doLogin(VALID_EMAIL, VALID_PASSWORD, loginPresenter);
         verify(loginView).showProgress();
+    }
+
+    @Test
+    public void testBypassLoginNavigatesToLandingPage() {
+        loginPresenter.bypassLogin();
+        verify(loginView).navigateToLandingPage();
     }
 
     @Test

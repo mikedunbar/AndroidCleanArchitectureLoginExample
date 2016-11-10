@@ -1,6 +1,6 @@
-package com.example.mdunbar.sampleapp.login.presenter;
+package com.example.mdunbar.sampleapp.ui.login.presenter;
 
-import com.example.mdunbar.sampleapp.login.view.LoginView;
+import com.example.mdunbar.sampleapp.ui.login.view.LoginView;
 
 /**
  * Presenter for the Login screen.
@@ -27,4 +27,9 @@ public interface LoginPresenter {
      * @param password Login password
      */
     void doLogin(String email, String password);
+
+    /**
+     * By pass the login process, enter as a guest
+     */
+    void bypassLogin();
 }

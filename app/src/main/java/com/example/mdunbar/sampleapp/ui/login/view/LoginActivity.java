@@ -1,4 +1,4 @@
-package com.example.mdunbar.sampleapp.login.view;
+package com.example.mdunbar.sampleapp.ui.login.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,10 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.mdunbar.sampleapp.landing.LandingPageActivity;
+import com.example.mdunbar.sampleapp.ui.landing.LandingPageActivity;
 import com.example.mdunbar.sampleapp.SampleApplication;
 import com.example.mdunbar.sampleapp.R;
-import com.example.mdunbar.sampleapp.login.presenter.LoginPresenter;
+import com.example.mdunbar.sampleapp.ui.login.presenter.LoginPresenter;
 
 import javax.inject.Inject;
 
@@ -61,6 +61,14 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
             }
         });
 
+        Button bypassButton = (Button) findViewById(R.id.bypass_login_button);
+        bypassButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bypassLogin();
+            }
+        });
+
         formView = findViewById(R.id.login_form);
         progressView = findViewById(R.id.login_progress);
     }
@@ -83,19 +91,22 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         loginPresenter.doLogin(email, password);
     }
 
-
-    @Override
-    public void setEmail(String email) {
-        emailView.setText(email);
+    private void bypassLogin() {
+        loginPresenter.bypassLogin();
     }
+
+   /******** LoginView Methods ***/
+   @Override
+   public void setEmail(String email) {
+       emailView.setText(email);
+   }
 
     @Override
     public void setPassword(String password) {
         passwordView.setText(password);
     }
 
-    /******** LoginView Methods ***/
-   @Override
+    @Override
     public void showEmailRequiredError() {
         emailView.setError(getString(R.string.error_field_required));
         emailView.requestFocus();
