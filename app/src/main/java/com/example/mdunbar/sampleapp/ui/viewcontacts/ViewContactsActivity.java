@@ -2,10 +2,13 @@ package com.example.mdunbar.sampleapp.ui.viewcontacts;
 
 import android.Manifest;
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -18,10 +21,10 @@ import android.widget.TextView;
 import com.example.mdunbar.sampleapp.R;
 
 public class ViewContactsActivity extends AppCompatActivity {
-
-
     private static final int READ_CONTACTS_PERM_REQUEST = 123;
     private TextView contactsText;
+    private boolean userCheckedDoNotAskAgain = false;
+    private boolean rationalizeUpfront = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +43,14 @@ public class ViewContactsActivity extends AppCompatActivity {
     }
 
     private void loadContacts() {
-        if (!readContactsPermGranted()) {
-            if (shouldShowReadContactsPermRationale()) {
-                showReadContactsPermRequestRationale();
+        if (!permissionGranted()) {
+            if (userCheckedDoNotAskAgain) {
+                rationalizePermissionWithLinkToSettings();
+            }
+            else if (rationalizeUpfront || shouldRationalizePermission()) {
+                rationalizePermissionWithLinkToPermissionRequest();
             } else {
-                requestReadContactsPerm();
+                requestPermission();
             }
             return;
         }
@@ -68,27 +74,46 @@ public class ViewContactsActivity extends AppCompatActivity {
         }
     }
 
-    private void showReadContactsPermRequestRationale() {
+    private void rationalizePermissionWithLinkToSettings() {
         Snackbar.make(findViewById(R.id.activity_landing_page),
-                "To user this feature, you must grant permission to read your contacts",
-                Snackbar.LENGTH_INDEFINITE).setAction("OK",
+                "To browse contacts, grant permission to access your contacts.",
+                Snackbar.LENGTH_INDEFINITE).setAction("SETTINGS",
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        requestReadContactsPerm();
+                        launchAppSettingsActivity();
                     }
                 }).show();
     }
 
-    private boolean shouldShowReadContactsPermRationale() {
+    private void launchAppSettingsActivity() {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", getPackageName(), null);
+        intent.setData(uri);
+        startActivity(intent);
+    }
+
+    private void rationalizePermissionWithLinkToPermissionRequest() {
+        Snackbar.make(findViewById(R.id.activity_landing_page),
+                "To browse contacts, you must grant permission to read your contacts",
+                Snackbar.LENGTH_INDEFINITE).setAction("OK",
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        requestPermission();
+                    }
+                }).show();
+    }
+
+    private boolean shouldRationalizePermission() {
         return ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_CONTACTS);
     }
 
-    private boolean readContactsPermGranted() {
+    private boolean permissionGranted() {
         return ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED;
     }
 
-    private void requestReadContactsPerm() {
+    private void requestPermission() {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, READ_CONTACTS_PERM_REQUEST);
     }
 
@@ -99,7 +124,7 @@ public class ViewContactsActivity extends AppCompatActivity {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     loadContacts();
                 } else {
-                    // permission denied, boo! Disable the functionality that depends on this permission.
+                    userCheckedDoNotAskAgain = !shouldRationalizePermission();
                 }
             }
         }
