@@ -7,6 +7,7 @@ I just had Android Studio generate a sample login activity application, and then
 - Added a landing page activity that we send the user to after successful login.
 - Moved the login logic to the MVP UI architectural pattern (brute force/no framework)
 - Added unit tests for the non-Android code
+- Use RxJava and RxAndroid for threading support (work in background thread, update UI on main thread)
 - Used Dagger 2 for dependency injection
 - Gracefully handle activity lifecycle events, so we attach/detach to the presenter appropriately and don't lose TXN status
 - Organize classes into a sensible package structure
@@ -18,14 +19,8 @@ I just had Android Studio generate a sample login activity application, and then
 - foo@example.com / hello
 - bar@example.com / world
 
-## Notes
-- The threading support in AbstractUseCase is definitely more complicated that just using an
-  AsynchTask, but it only needs to be done that once and all use cases inherit support for
-  running off of the UI thread until results are available. I think it's worth it to decouple that
-  core business logic from Android, but there may be better ways to still achieve that.
-
 ## Possible Next Steps
+- RetroLambda (or similar) 
 - Espresso integration tests
-- Simplify the threading code, maybe by using RxJava 
 - Instrumentation (or Robolectric) unit tests for Android code
 - Use a framework for MVP
