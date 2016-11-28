@@ -1,14 +1,12 @@
 package com.example.mdunbar.sampleapp.model;
 
-import com.example.mdunbar.sampleapp.model.LoginResultsListener;
-import com.example.mdunbar.sampleapp.model.LoginUseCase;
-import com.google.common.util.concurrent.MoreExecutors;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import rx.schedulers.Schedulers;
 
 import static org.mockito.Mockito.verify;
 
@@ -23,7 +21,7 @@ public class LoginUseCaseTest {
 
     @Before
     public void setUp() {
-        loginUseCase = new LoginUseCase(MoreExecutors.newDirectExecutorService(), MoreExecutors.directExecutor());
+        loginUseCase = new LoginUseCase(Schedulers.immediate(), Schedulers.immediate());
     }
 
     @Test

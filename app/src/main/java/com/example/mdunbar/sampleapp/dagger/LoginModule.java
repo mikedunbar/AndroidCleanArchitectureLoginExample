@@ -20,7 +20,7 @@ import dagger.Provides;
 public class LoginModule {
 
     @Provides LoginUseCase provideLoginUseCase() {
-        return new LoginUseCase(LoginUseCase.BACKGROUND_EXECUTOR_SERVICE, new HandlerExecutor(new Handler(Looper.getMainLooper())));
+        return new LoginUseCase();
     }
 
 

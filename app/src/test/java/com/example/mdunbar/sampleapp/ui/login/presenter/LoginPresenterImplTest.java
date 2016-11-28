@@ -57,7 +57,7 @@ public class LoginPresenterImplTest {
     @Test
     public void testAttachViewWithLoginStartedAndCompletedSuccessfullyNavigatesToLandingPage() {
         loginPresenter.loginStarted = true;
-        loginPresenter.loginResult = LoginUseCase.Result.SUCCESS;
+        loginPresenter.loginResult = LoginPresenterImpl.Result.SUCCESS;
         loginPresenter.attachView(loginView);
         verify(loginView).navigateToLandingPage();
     }
@@ -65,7 +65,7 @@ public class LoginPresenterImplTest {
     @Test
     public void testAttachViewWithLoginStartedAndCompletedWithNetworkErrorHidesProgressViewAndShowsNetworkErrorOnView() {
         loginPresenter.loginStarted = true;
-        loginPresenter.loginResult = LoginUseCase.Result.NETWORK_ERROR;
+        loginPresenter.loginResult = LoginPresenterImpl.Result.NETWORK_ERROR;
         loginPresenter.attachView(loginView);
         verify(loginView).hideProgress();
         verify(loginView).showNetworkError();
@@ -74,7 +74,7 @@ public class LoginPresenterImplTest {
     @Test
     public void testAttachViewWithLoginStartedAndCompletedWithValidationErrorHidesProgressViewAndShowsValidationErrorOnView() {
         loginPresenter.loginStarted = true;
-        loginPresenter.loginResult = LoginUseCase.Result.VALIDATION_ERROR;
+        loginPresenter.loginResult = LoginPresenterImpl.Result.VALIDATION_ERROR;
         loginPresenter.attachView(loginView);
         verify(loginView).hideProgress();
         verify(loginView).showValidationError();

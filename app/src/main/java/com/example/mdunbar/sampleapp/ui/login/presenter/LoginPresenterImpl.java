@@ -18,10 +18,10 @@ public class LoginPresenterImpl implements LoginPresenter, LoginResultsListener 
     private LoginView loginView;
     private LoginUseCase loginUseCase;
 
-    @VisibleForTesting String email;
-    @VisibleForTesting String password;
+    private String email;
+    private String password;
     @VisibleForTesting boolean loginStarted;
-    @VisibleForTesting LoginUseCase.Result loginResult;
+    @VisibleForTesting Result loginResult;
 
     /**
      * Create a new Login Presenter
@@ -107,7 +107,7 @@ public class LoginPresenterImpl implements LoginPresenter, LoginResultsListener 
     /*** LoginResultsListener ***/
     @Override
     public void onLoginSuccess() {
-        loginResult = LoginUseCase.Result.SUCCESS;
+        loginResult = Result.SUCCESS;
         if (loginView != null) {
             loginView.navigateToLandingPage();
         }
@@ -115,7 +115,7 @@ public class LoginPresenterImpl implements LoginPresenter, LoginResultsListener 
 
     @Override
     public void onNetworkError() {
-        loginResult = LoginUseCase.Result.NETWORK_ERROR;
+        loginResult = Result.NETWORK_ERROR;
         if (loginView != null) {
             loginView.hideProgress();
             loginView.showNetworkError();
@@ -124,10 +124,16 @@ public class LoginPresenterImpl implements LoginPresenter, LoginResultsListener 
 
     @Override
     public void onValidationError() {
-        loginResult = LoginUseCase.Result.VALIDATION_ERROR;
+        loginResult = Result.VALIDATION_ERROR;
         if (loginView != null) {
             loginView.hideProgress();
             loginView.showValidationError();
         }
+    }
+
+    enum Result {
+        SUCCESS,
+        NETWORK_ERROR,
+        VALIDATION_ERROR;
     }
 }
