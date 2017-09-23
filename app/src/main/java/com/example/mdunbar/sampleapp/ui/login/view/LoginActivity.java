@@ -11,9 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.mdunbar.sampleapp.ui.landing.LandingPageActivity;
-import com.example.mdunbar.sampleapp.SampleApplication;
 import com.example.mdunbar.sampleapp.R;
+import com.example.mdunbar.sampleapp.SampleApplication;
+import com.example.mdunbar.sampleapp.ui.landing.LandingPageActivity;
 import com.example.mdunbar.sampleapp.ui.login.presenter.LoginPresenter;
 
 import javax.inject.Inject;
@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         loginPresenter.bypassLogin();
     }
 
-   /******** LoginView Methods ***/
+   //region LoginView methods
    @Override
    public void setEmail(String email) {
        emailView.setText(email);
@@ -162,6 +162,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         progressView.setVisibility(View.GONE);
         formView.setVisibility(View.VISIBLE);
     }
+
+    //endregion
 
 }
 

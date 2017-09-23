@@ -6,7 +6,6 @@ package com.example.mdunbar.sampleapp.ui.login.view;
  *
  * @author Mike Dunbar
  */
-
 public interface LoginView {
 
     void setEmail(String email);

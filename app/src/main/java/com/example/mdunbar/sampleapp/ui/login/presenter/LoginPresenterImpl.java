@@ -9,8 +9,8 @@ import com.google.common.base.Strings;
 import javax.inject.Inject;
 
 /**
- * Basic {@link LoginPresenter} that also listens for login results and updates the {@link LoginView}
- * with results.
+ * Basic {@link LoginPresenter} and {@link LoginResultsListener}, updates the {@link LoginView}
+ * with login results.
  *
  * @author Mike Dunbar
  */
@@ -134,6 +134,6 @@ public class LoginPresenterImpl implements LoginPresenter, LoginResultsListener 
     enum Result {
         SUCCESS,
         NETWORK_ERROR,
-        VALIDATION_ERROR;
+        VALIDATION_ERROR
     }
 }

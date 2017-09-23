@@ -22,6 +22,7 @@ import com.example.mdunbar.sampleapp.R;
 
 public class ViewContactsActivity extends AppCompatActivity {
     private static final int READ_CONTACTS_PERM_REQUEST = 123;
+    public static final String PERMISSION = Manifest.permission.READ_CONTACTS;
     private TextView contactsText;
     private boolean userCheckedDoNotAskAgain = false;
     private boolean rationalizeUpfront = false;
@@ -106,15 +107,15 @@ public class ViewContactsActivity extends AppCompatActivity {
     }
 
     private boolean shouldRationalizePermission() {
-        return ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_CONTACTS);
+        return ActivityCompat.shouldShowRequestPermissionRationale(this, PERMISSION);
     }
 
     private boolean permissionGranted() {
-        return ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED;
+        return ContextCompat.checkSelfPermission(this, PERMISSION) == PackageManager.PERMISSION_GRANTED;
     }
 
     private void requestPermission() {
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, READ_CONTACTS_PERM_REQUEST);
+        ActivityCompat.requestPermissions(this, new String[]{PERMISSION}, READ_CONTACTS_PERM_REQUEST);
     }
 
     @Override

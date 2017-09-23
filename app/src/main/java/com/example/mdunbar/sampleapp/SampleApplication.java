@@ -6,7 +6,7 @@ import com.example.mdunbar.sampleapp.dagger.DaggerLoginComponent;
 import com.example.mdunbar.sampleapp.dagger.LoginComponent;
 
 /**
- * Simple login application
+ * Sample app to try out code and APIs.
  *
  * @author Mike Dunbar
  */

@@ -3,7 +3,9 @@
           package="com.example.mdunbar.sampleapp">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
+
 
     <application
         android:name=".SampleApplication"

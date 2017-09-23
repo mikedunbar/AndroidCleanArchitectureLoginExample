@@ -70,7 +70,7 @@ public class LoginUseCase {
                 });
     }
 
-    static class LoginWebService {
+    private static class LoginWebService {
         static boolean loginUser(String email, String password) throws Exception {
             String[] DUMMY_CREDENTIALS = new String[]{
                     "foo@example.com:hello", "bar@example.com:world"};
@@ -86,12 +86,12 @@ public class LoginUseCase {
                     break;
                 }
             }
-            return match ? true : false;
+            return match;
         }
     }
 
      private void logThreadState(String desc) {
          Thread t = Thread.currentThread();
-         //Log.d("LoginUseCase", String.format("%s - current thread: %s", desc, t.getName()));
+         Log.d("LoginUseCase", String.format("%s - current thread: %s", desc, t.getName()));
     }
 }
