@@ -1,6 +1,6 @@
-package com.example.mdunbar.sampleapp.dagger;
+package com.example.mdunbar.login.dagger;
 
-import com.example.mdunbar.sampleapp.ui.login.view.LoginActivity;
+import com.example.mdunbar.login.ui.login.view.LoginActivity;
 
 import javax.inject.Singleton;
 

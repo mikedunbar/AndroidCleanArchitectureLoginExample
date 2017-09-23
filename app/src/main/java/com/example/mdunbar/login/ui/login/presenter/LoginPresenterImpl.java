@@ -1,8 +1,8 @@
-package com.example.mdunbar.sampleapp.ui.login.presenter;
+package com.example.mdunbar.login.ui.login.presenter;
 
-import com.example.mdunbar.sampleapp.ui.login.view.LoginView;
-import com.example.mdunbar.sampleapp.model.LoginResultsListener;
-import com.example.mdunbar.sampleapp.model.LoginUseCase;
+import com.example.mdunbar.login.ui.login.view.LoginView;
+import com.example.mdunbar.login.model.LoginResultsListener;
+import com.example.mdunbar.login.model.LoginUseCase;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
 

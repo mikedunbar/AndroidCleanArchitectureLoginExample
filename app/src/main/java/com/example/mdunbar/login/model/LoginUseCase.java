@@ -1,4 +1,4 @@
-package com.example.mdunbar.sampleapp.model;
+package com.example.mdunbar.login.model;
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -43,7 +43,7 @@ public class LoginUseCase {
             @Override
             public Boolean call() throws Exception {
                 resultsListener.logThreadState("fromCallable");
-                return LoginWebService.loginUser(email, password);
+                return new UserRepository().loginUser(email, password);
             }});
 
         myObservable
@@ -66,25 +66,5 @@ public class LoginUseCase {
                         resultsListener.onNetworkError();
                     }
                 });
-    }
-
-    private static class LoginWebService {
-        static boolean loginUser(String email, String password) throws Exception {
-            String[] DUMMY_CREDENTIALS = new String[]{
-                    "foo@example.com:hello", "bar@example.com:world"};
-
-            // Simulate network access with delay
-            Thread.sleep(2000);
-
-            boolean match = false;
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(email)) {
-                    match = pieces[1].equals(password);
-                    break;
-                }
-            }
-            return match;
-        }
     }
 }

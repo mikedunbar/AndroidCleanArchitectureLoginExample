@@ -1,8 +1,8 @@
-package com.example.mdunbar.sampleapp.dagger;
+package com.example.mdunbar.login.dagger;
 
-import com.example.mdunbar.sampleapp.model.LoginUseCase;
-import com.example.mdunbar.sampleapp.ui.login.presenter.LoginPresenter;
-import com.example.mdunbar.sampleapp.ui.login.presenter.LoginPresenterImpl;
+import com.example.mdunbar.login.model.LoginUseCase;
+import com.example.mdunbar.login.ui.login.presenter.LoginPresenter;
+import com.example.mdunbar.login.ui.login.presenter.LoginPresenterImpl;
 
 import dagger.Module;
 import dagger.Provides;

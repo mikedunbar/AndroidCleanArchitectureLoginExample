@@ -1,4 +1,4 @@
-package com.example.mdunbar.sampleapp.ui.login.view;
+package com.example.mdunbar.login.ui.login.view;
 
 /**
  * View for the login screen. Informs the user of any errors, progress, and navigates to the

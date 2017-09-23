@@ -1,16 +1,16 @@
-package com.example.mdunbar.sampleapp;
+package com.example.mdunbar.login;
 
 import android.app.Application;
 
-import com.example.mdunbar.sampleapp.dagger.DaggerLoginComponent;
-import com.example.mdunbar.sampleapp.dagger.LoginComponent;
+import com.example.mdunbar.login.dagger.DaggerLoginComponent;
+import com.example.mdunbar.login.dagger.LoginComponent;
 
 /**
  * Sample app to try out code and APIs.
  *
  * @author Mike Dunbar
  */
-public class SampleApplication extends Application {
+public class LoginApplication extends Application {
     LoginComponent loginComponent;
 
     @Override

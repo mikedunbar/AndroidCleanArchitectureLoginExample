@@ -1,4 +1,4 @@
-package com.example.mdunbar.sampleapp.ui.landing;
+package com.example.mdunbar.login.ui.landing;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,8 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.mdunbar.sampleapp.R;
-import com.example.mdunbar.sampleapp.ui.login.view.LoginActivity;
+import com.example.mdunbar.login.R;
+import com.example.mdunbar.login.ui.login.view.LoginActivity;
 
 /**
  * Landing page for app, displayed after a successful login.

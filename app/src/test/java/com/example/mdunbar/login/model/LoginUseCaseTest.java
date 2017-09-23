@@ -1,4 +1,4 @@
-package com.example.mdunbar.sampleapp.model;
+package com.example.mdunbar.login.model;
 
 import org.junit.Before;
 import org.junit.Test;

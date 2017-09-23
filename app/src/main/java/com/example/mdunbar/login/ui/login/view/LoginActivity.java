@@ -1,4 +1,4 @@
-package com.example.mdunbar.sampleapp.ui.login.view;
+package com.example.mdunbar.login.ui.login.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,10 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.mdunbar.sampleapp.R;
-import com.example.mdunbar.sampleapp.SampleApplication;
-import com.example.mdunbar.sampleapp.ui.landing.LandingPageActivity;
-import com.example.mdunbar.sampleapp.ui.login.presenter.LoginPresenter;
+import com.example.mdunbar.login.R;
+import com.example.mdunbar.login.LoginApplication;
+import com.example.mdunbar.login.ui.landing.LandingPageActivity;
+import com.example.mdunbar.login.ui.login.presenter.LoginPresenter;
 
 import javax.inject.Inject;
 
@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ((SampleApplication)getApplication()).getLoginComponent().inject(this);
+        ((LoginApplication)getApplication()).getLoginComponent().inject(this);
 
         setContentView(R.layout.activity_login);
 
