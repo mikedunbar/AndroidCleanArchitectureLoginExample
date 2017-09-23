@@ -1,6 +1,7 @@
 # Clean Architecture Login Example
-Sample login screen, for showcasing the Clean architecture approach
-See https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html for more info
+Sample login screen, for showcasing the Clean architecture approach in Android.
+
+See the [definitive article](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html) for more info
 
 ## Development History
 I just had Android Studio generate a sample login activity application, and then:
