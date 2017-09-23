@@ -15,7 +15,7 @@ import javax.inject.Inject;
  * @author Mike Dunbar
  */
 public class LoginPresenterImpl implements LoginPresenter, LoginResultsListener {
-    private LoginView loginView;
+    @VisibleForTesting LoginView loginView;
     private LoginUseCase loginUseCase;
 
     private String email;
@@ -129,6 +129,11 @@ public class LoginPresenterImpl implements LoginPresenter, LoginResultsListener 
             loginView.hideProgress();
             loginView.showValidationError();
         }
+    }
+
+    @Override
+    public void logThreadState(String desc) {
+        loginView.logThreadState(desc);
     }
 
     enum Result {

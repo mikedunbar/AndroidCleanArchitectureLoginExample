@@ -61,14 +61,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
             }
         });
 
-        Button bypassButton = (Button) findViewById(R.id.bypass_login_button);
-        bypassButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bypassLogin();
-            }
-        });
-
         formView = findViewById(R.id.login_form);
         progressView = findViewById(R.id.login_progress);
     }
@@ -89,10 +81,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         String email = emailView.getText().toString();
         String password = passwordView.getText().toString();
         loginPresenter.doLogin(email, password);
-    }
-
-    private void bypassLogin() {
-        loginPresenter.bypassLogin();
     }
 
    //region LoginView methods
@@ -161,6 +149,11 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     public void hideProgress() {
         progressView.setVisibility(View.GONE);
         formView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void logThreadState(String desc) {
+
     }
 
     //endregion

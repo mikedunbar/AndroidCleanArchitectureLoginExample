@@ -21,4 +21,10 @@ public interface LoginResultsListener {
      * Validate error callback
      */
     void onValidationError();
+
+    /**
+     * Logging util method, just for debugging
+     * @param desc description
+     */
+    void logThreadState(String desc);
 }

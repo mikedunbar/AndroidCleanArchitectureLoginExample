@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 
@@ -17,8 +18,6 @@ public class LoginPresenterImplTest {
     @Mock private LoginView loginView;
     @Mock private LoginUseCase loginUseCase;
     private LoginPresenterImpl loginPresenter;
-    private String INVALID_EMAIL = "tt_gmail.com"; // No @
-    private String INVALID_PASSWORD = "abcd"; // < 5 characters
     private String VALID_EMAIL = "tt@gmail.com";
     private String VALID_PASSWORD = "abcde";
 
@@ -28,8 +27,6 @@ public class LoginPresenterImplTest {
         loginPresenter.attachView(loginView);
 
         // Discard interactions with loginView during setup, so they don't throw off the counts for other methods under test
-        // The test code is way more readable that way - simply verify(loginView), compared to compensating with verify(loginView, times(n))
-        // Test methods for attachView just re-call it explicitly and we count from THAT point on
         reset(loginView);
     }
 
@@ -81,6 +78,12 @@ public class LoginPresenterImplTest {
     }
 
     @Test
+    public void testDetachViewSetsViewToNull() {
+        loginPresenter.detachView();
+        assertNull(loginPresenter.loginView);
+    }
+
+    @Test
     public void testDoLoginWithNullEmailShowsEmailRequiredErrorOnView() {
         loginPresenter.doLogin(null, "password");
         verify(loginView).showEmailRequiredError();
@@ -94,12 +97,14 @@ public class LoginPresenterImplTest {
 
     @Test
     public void testDoLoginWithInvalidEmailShowsInvalidEmailErrorOnView() {
+        String INVALID_EMAIL = "tt_gmail.com";
         loginPresenter.doLogin(INVALID_EMAIL, VALID_PASSWORD);
         verify(loginView).showEmailInvalidError();
     }
 
     @Test
     public void testDoLoginWithInvalidPasswordShowsInvalidPasswordErrorOnView() {
+        String INVALID_PASSWORD = "abcd";
         loginPresenter.doLogin(VALID_EMAIL, INVALID_PASSWORD);
         verify(loginView).showPasswordInvalidError();
     }
@@ -131,7 +136,7 @@ public class LoginPresenterImplTest {
     }
 
     @Test
-    public void testOnValidationErrorHidesProgressAndShowsNetworkErrorOnView() {
+    public void testOnValidationErrorHidesProgressAndShowsValidationErrorOnView() {
         loginPresenter.onValidationError();
         verify(loginView).hideProgress(); //
         verify(loginView).showValidationError();

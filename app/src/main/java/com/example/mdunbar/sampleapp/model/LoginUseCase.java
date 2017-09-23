@@ -1,7 +1,5 @@
 package com.example.mdunbar.sampleapp.model;
 
-import android.util.Log;
-
 import com.google.common.annotations.VisibleForTesting;
 
 import java.util.concurrent.Callable;
@@ -44,7 +42,7 @@ public class LoginUseCase {
         rx.Observable<Boolean> myObservable = Observable.fromCallable(new Callable<Boolean>() {
             @Override
             public Boolean call() throws Exception {
-                LoginUseCase.this.logThreadState("fromCallable");
+                resultsListener.logThreadState("fromCallable");
                 return LoginWebService.loginUser(email, password);
             }});
 
@@ -54,7 +52,7 @@ public class LoginUseCase {
                 .subscribe(new Action1<Boolean>() {
                     @Override
                     public void call(Boolean b) {
-                        logThreadState("success callback");
+                        resultsListener.logThreadState("success callback");
                         if(b) {
                             resultsListener.onLoginSuccess();
                         } else {
@@ -64,7 +62,7 @@ public class LoginUseCase {
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        logThreadState("error callback");
+                        resultsListener.logThreadState("error callback");
                         resultsListener.onNetworkError();
                     }
                 });
@@ -88,10 +86,5 @@ public class LoginUseCase {
             }
             return match;
         }
-    }
-
-     private void logThreadState(String desc) {
-         Thread t = Thread.currentThread();
-         Log.d("LoginUseCase", String.format("%s - current thread: %s", desc, t.getName()));
     }
 }

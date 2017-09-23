@@ -29,4 +29,7 @@ public interface LoginView {
     void hideProgress();
 
     void navigateToLandingPage();
+
+    // Just for debugging
+    void logThreadState(String desc);
 }

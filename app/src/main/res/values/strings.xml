@@ -14,8 +14,4 @@
     <string name="error_field_required">This field is required</string>
     <string name="logout">Log Out</string>
     <string name="landing_page">Landing Page</string>
-    <string name="bypass_login">Enter as Guest</string>
-    <string name="view_contacts">Browse Contacts</string>
-    <string name="view_contacts_description">The code behind this screen demonstrates the use of Runtime Permissions, using the READ_CONTACTS
-        permission.</string>
 </resources>
