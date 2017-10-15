@@ -2,6 +2,7 @@ package com.example.mdunbar.login.ui.login.presenter;
 
 import com.example.mdunbar.login.ui.login.view.LoginView;
 import com.example.mdunbar.login.model.LoginUseCase;
+import com.example.mdunbar.login.util.Logger;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,13 +18,14 @@ import static org.mockito.Mockito.verify;
 public class LoginPresenterImplTest {
     @Mock private LoginView loginView;
     @Mock private LoginUseCase loginUseCase;
+    @Mock private Logger logger;
     private LoginPresenterImpl loginPresenter;
     private String VALID_EMAIL = "tt@gmail.com";
     private String VALID_PASSWORD = "abcde";
 
     @Before
     public void setUp() {
-        loginPresenter = new LoginPresenterImpl(loginUseCase);
+        loginPresenter = new LoginPresenterImpl(loginUseCase, logger);
         loginPresenter.attachView(loginView);
 
         // Discard interactions with loginView during setup, so they don't throw off the counts for other methods under test

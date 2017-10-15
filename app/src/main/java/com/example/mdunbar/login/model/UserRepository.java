@@ -5,7 +5,7 @@ package com.example.mdunbar.login.model;
  *
  * @author Mike Dunbar
  */
-public class UserRepository {
+    class UserRepository {
 
     // Sample uses a simple string[] for now, would really be a combination of a local SQLite database and a web service
     boolean loginUser(String email, String password) throws Exception {
@@ -13,7 +13,7 @@ public class UserRepository {
                 "foo@example.com:hello", "bar@example.com:world"};
 
         // Simulate network access with delay
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         boolean match = false;
         for (String credential : DUMMY_CREDENTIALS) {

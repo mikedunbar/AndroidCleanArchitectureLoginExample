@@ -3,6 +3,7 @@ package com.example.mdunbar.login.ui.login.presenter;
 import com.example.mdunbar.login.ui.login.view.LoginView;
 import com.example.mdunbar.login.model.LoginResultsListener;
 import com.example.mdunbar.login.model.LoginUseCase;
+import com.example.mdunbar.login.util.Logger;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
 
@@ -15,6 +16,8 @@ import javax.inject.Inject;
  * @author Mike Dunbar
  */
 public class LoginPresenterImpl implements LoginPresenter, LoginResultsListener {
+    private static final String LOG_TAG = "LoginPresenterImpl";
+
     @VisibleForTesting LoginView loginView;
     private LoginUseCase loginUseCase;
 
@@ -22,6 +25,7 @@ public class LoginPresenterImpl implements LoginPresenter, LoginResultsListener 
     private String password;
     @VisibleForTesting boolean loginStarted;
     @VisibleForTesting Result loginResult;
+    private Logger logger;
 
     /**
      * Create a new Login Presenter
@@ -29,8 +33,9 @@ public class LoginPresenterImpl implements LoginPresenter, LoginResultsListener 
      * @param loginUseCase Use case to delegate core logic work to.
      */
     @Inject
-    public LoginPresenterImpl(LoginUseCase loginUseCase) {
+    public LoginPresenterImpl(LoginUseCase loginUseCase, Logger logger) {
         this.loginUseCase = loginUseCase;
+        this.logger = logger;
     }
 
     /**
@@ -38,20 +43,24 @@ public class LoginPresenterImpl implements LoginPresenter, LoginResultsListener 
      * @param loginView View to update based on login results.
      */
     public void attachView(LoginView loginView) {
+        logger.log(LOG_TAG, "Attaching view: " + loginView + ", to: " + this);
         this.loginView = loginView;
         loginView.setEmail(email);
         loginView.setPassword(password);
 
         if (!loginStarted) {
+            logger.log(LOG_TAG, "login not started");
             loginView.hideProgress();
             return;
         }
 
         if (loginResult == null) {
+            logger.log(LOG_TAG, "login started, no result present");
             loginView.showProgress();
             return;
         }
 
+        logger.log(LOG_TAG, "login started, " + loginResult + " was present.");
         switch (loginResult) {
             case SUCCESS:
                 onLoginSuccess();
@@ -66,6 +75,7 @@ public class LoginPresenterImpl implements LoginPresenter, LoginResultsListener 
     }
 
     public void detachView() {
+        logger.log(LOG_TAG, "Detaching view: " + loginView + " from " + this);
         this.loginView = null;
     }
 
@@ -107,6 +117,7 @@ public class LoginPresenterImpl implements LoginPresenter, LoginResultsListener 
     /*** LoginResultsListener ***/
     @Override
     public void onLoginSuccess() {
+        logger.log(LOG_TAG, "login success, view: " + loginView);
         loginResult = Result.SUCCESS;
         if (loginView != null) {
             loginView.navigateToLandingPage();
@@ -115,6 +126,7 @@ public class LoginPresenterImpl implements LoginPresenter, LoginResultsListener 
 
     @Override
     public void onNetworkError() {
+        logger.log(LOG_TAG, "network error, view: " + loginView);
         loginResult = Result.NETWORK_ERROR;
         if (loginView != null) {
             loginView.hideProgress();
@@ -124,6 +136,7 @@ public class LoginPresenterImpl implements LoginPresenter, LoginResultsListener 
 
     @Override
     public void onValidationError() {
+        logger.log(LOG_TAG, "validation error, view: " + loginView);
         loginResult = Result.VALIDATION_ERROR;
         if (loginView != null) {
             loginView.hideProgress();
@@ -133,7 +146,7 @@ public class LoginPresenterImpl implements LoginPresenter, LoginResultsListener 
 
     @Override
     public void logThreadState(String desc) {
-        loginView.logThreadState(desc);
+        logger.log(LOG_TAG, "Thread: " + Thread.currentThread().getId() + ": " + desc);
     }
 
     enum Result {

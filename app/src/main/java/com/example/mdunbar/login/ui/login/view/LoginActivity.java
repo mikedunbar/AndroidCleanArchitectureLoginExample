@@ -150,12 +150,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         progressView.setVisibility(View.GONE);
         formView.setVisibility(View.VISIBLE);
     }
-
-    @Override
-    public void logThreadState(String desc) {
-
-    }
-
     //endregion
 
 }
