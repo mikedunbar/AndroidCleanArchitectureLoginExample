@@ -13,6 +13,9 @@ I just had Android Studio generate a sample login activity application, and then
 - Use RxJava and RxAndroid for threading support (work in background thread, update UI on main thread)
 - Use Dagger 2 for dependency injection
 - Handle activity start/stop, so we attach/detach to the presenter appropriately and don't lose TXN status
+- Define a simple UserRepository, only backed by an in-memory store with simulated network access delay
+- Define Logger interface with Android-specific that can be passed to the presenter
+
 
 ## Valid login credentials:
 - foo@example.com / hello
